@@ -13,5 +13,6 @@ namespace DEM
     /// </summary>
     public partial class App : Application
     {
+        public static readonly DEMEntities entities = new DEMEntities();
     }
 }
