@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DEMModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DataComments">
+    <Key>
+      <PropertyRef Name="commentID" />
+    </Key>
+    <Property Name="commentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="masterID" Type="int" Nullable="false" />
+    <Property Name="requestID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DataRequests">
+    <Key>
+      <PropertyRef Name="requestID" />
+    </Key>
+    <Property Name="requestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="startDate" Type="date" Nullable="false" />
+    <Property Name="id_orgTechType" Type="int" Nullable="false" />
+    <Property Name="orgTechModel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id_problemDescryption" Type="int" Nullable="false" />
+    <Property Name="id_requestStatus" Type="int" Nullable="false" />
+    <Property Name="completionDate" Type="date" />
+    <Property Name="repairParts" Type="nvarchar(max)" />
+    <Property Name="masterID" Type="int" />
+    <Property Name="clientID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DataUsers">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id_type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrgTechTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProblemDescryptions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RequestStatuses">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Types">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_DataComments_DataRequests">
+    <End Role="DataRequests" Type="Self.DataRequests" Multiplicity="1" />
+    <End Role="DataComments" Type="Self.DataComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DataRequests">
+        <PropertyRef Name="requestID" />
+      </Principal>
+      <Dependent Role="DataComments">
+        <PropertyRef Name="requestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataComments_DataUsers">
+    <End Role="DataUsers" Type="Self.DataUsers" Multiplicity="1" />
+    <End Role="DataComments" Type="Self.DataComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DataUsers">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="DataComments">
+        <PropertyRef Name="masterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_DataUsers">
+    <End Role="DataUsers" Type="Self.DataUsers" Multiplicity="1" />
+    <End Role="DataRequests" Type="Self.DataRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DataUsers">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="clientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_DataUsers1">
+    <End Role="DataUsers" Type="Self.DataUsers" Multiplicity="0..1" />
+    <End Role="DataRequests" Type="Self.DataRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DataUsers">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="masterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_OrgTechTypes">
+    <End Role="OrgTechTypes" Type="Self.OrgTechTypes" Multiplicity="1" />
+    <End Role="DataRequests" Type="Self.DataRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrgTechTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="id_orgTechType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_ProblemDescryptions">
+    <End Role="ProblemDescryptions" Type="Self.ProblemDescryptions" Multiplicity="1" />
+    <End Role="DataRequests" Type="Self.DataRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProblemDescryptions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="id_problemDescryption" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_RequestStatuses">
+    <End Role="RequestStatuses" Type="Self.RequestStatuses" Multiplicity="1" />
+    <End Role="DataRequests" Type="Self.DataRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RequestStatuses">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="id_requestStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataUsers_Types">
+    <End Role="Types" Type="Self.Types" Multiplicity="1" />
+    <End Role="DataUsers" Type="Self.DataUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Types">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DataUsers">
+        <PropertyRef Name="id_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище DEMModelContainer">
+    <EntitySet Name="DataComments" EntityType="Self.DataComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DataRequests" EntityType="Self.DataRequests" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DataUsers" EntityType="Self.DataUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrgTechTypes" EntityType="Self.OrgTechTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProblemDescryptions" EntityType="Self.ProblemDescryptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequestStatuses" EntityType="Self.RequestStatuses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DataComments_DataRequests" Association="Self.FK_DataComments_DataRequests">
+      <End Role="DataRequests" EntitySet="DataRequests" />
+      <End Role="DataComments" EntitySet="DataComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataComments_DataUsers" Association="Self.FK_DataComments_DataUsers">
+      <End Role="DataUsers" EntitySet="DataUsers" />
+      <End Role="DataComments" EntitySet="DataComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_DataUsers" Association="Self.FK_DataRequests_DataUsers">
+      <End Role="DataUsers" EntitySet="DataUsers" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_DataUsers1" Association="Self.FK_DataRequests_DataUsers1">
+      <End Role="DataUsers" EntitySet="DataUsers" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_OrgTechTypes" Association="Self.FK_DataRequests_OrgTechTypes">
+      <End Role="OrgTechTypes" EntitySet="OrgTechTypes" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_ProblemDescryptions" Association="Self.FK_DataRequests_ProblemDescryptions">
+      <End Role="ProblemDescryptions" EntitySet="ProblemDescryptions" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_RequestStatuses" Association="Self.FK_DataRequests_RequestStatuses">
+      <End Role="RequestStatuses" EntitySet="RequestStatuses" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataUsers_Types" Association="Self.FK_DataUsers_Types">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="DataUsers" EntitySet="DataUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

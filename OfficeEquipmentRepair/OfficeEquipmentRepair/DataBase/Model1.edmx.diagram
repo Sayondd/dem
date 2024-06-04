@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="412c7947319b4bc589a6fdbe814616f9" Name="Diagram1">
+        <EntityTypeShape EntityType="DEMModel.DataComment" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEMModel.DataRequest" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEMModel.DataUser" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEMModel.OrgTechType" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEMModel.ProblemDescryption" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEMModel.RequestStatus" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEMModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEMModel.Type" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="DEMModel.FK_DataComments_DataRequests" ManuallyRouted="false" />
+        <AssociationConnector Association="DEMModel.FK_DataComments_DataUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DEMModel.FK_DataRequests_DataUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DEMModel.FK_DataRequests_DataUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="DEMModel.FK_DataRequests_OrgTechTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="DEMModel.FK_DataRequests_ProblemDescryptions" ManuallyRouted="false" />
+        <AssociationConnector Association="DEMModel.FK_DataRequests_RequestStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="DEMModel.FK_DataUsers_Types" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

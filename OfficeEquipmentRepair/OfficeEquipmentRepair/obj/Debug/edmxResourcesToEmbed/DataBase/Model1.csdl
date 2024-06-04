@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DEMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DataComment">
+    <Key>
+      <PropertyRef Name="commentID" />
+    </Key>
+    <Property Name="commentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="masterID" Type="Int32" Nullable="false" />
+    <Property Name="requestID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DataRequest" Relationship="Self.FK_DataComments_DataRequests" FromRole="DataComments" ToRole="DataRequests" />
+    <NavigationProperty Name="DataUser" Relationship="Self.FK_DataComments_DataUsers" FromRole="DataComments" ToRole="DataUsers" />
+  </EntityType>
+  <EntityType Name="DataRequest">
+    <Key>
+      <PropertyRef Name="requestID" />
+    </Key>
+    <Property Name="requestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="startDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="id_orgTechType" Type="Int32" Nullable="false" />
+    <Property Name="orgTechModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_problemDescryption" Type="Int32" Nullable="false" />
+    <Property Name="id_requestStatus" Type="Int32" Nullable="false" />
+    <Property Name="completionDate" Type="DateTime" Precision="0" />
+    <Property Name="repairParts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="masterID" Type="Int32" />
+    <Property Name="clientID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DataComments" Relationship="Self.FK_DataComments_DataRequests" FromRole="DataRequests" ToRole="DataComments" />
+    <NavigationProperty Name="DataUser" Relationship="Self.FK_DataRequests_DataUsers" FromRole="DataRequests" ToRole="DataUsers" />
+    <NavigationProperty Name="DataUser1" Relationship="Self.FK_DataRequests_DataUsers1" FromRole="DataRequests" ToRole="DataUsers" />
+    <NavigationProperty Name="OrgTechType" Relationship="Self.FK_DataRequests_OrgTechTypes" FromRole="DataRequests" ToRole="OrgTechTypes" />
+    <NavigationProperty Name="ProblemDescryption" Relationship="Self.FK_DataRequests_ProblemDescryptions" FromRole="DataRequests" ToRole="ProblemDescryptions" />
+    <NavigationProperty Name="RequestStatus" Relationship="Self.FK_DataRequests_RequestStatuses" FromRole="DataRequests" ToRole="RequestStatuses" />
+  </EntityType>
+  <EntityType Name="DataUser">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_type" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DataComments" Relationship="Self.FK_DataComments_DataUsers" FromRole="DataUsers" ToRole="DataComments" />
+    <NavigationProperty Name="DataRequests" Relationship="Self.FK_DataRequests_DataUsers" FromRole="DataUsers" ToRole="DataRequests" />
+    <NavigationProperty Name="DataRequests1" Relationship="Self.FK_DataRequests_DataUsers1" FromRole="DataUsers" ToRole="DataRequests" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_DataUsers_Types" FromRole="DataUsers" ToRole="Types" />
+  </EntityType>
+  <EntityType Name="OrgTechType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DataRequests" Relationship="Self.FK_DataRequests_OrgTechTypes" FromRole="OrgTechTypes" ToRole="DataRequests" />
+  </EntityType>
+  <EntityType Name="ProblemDescryption">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DataRequests" Relationship="Self.FK_DataRequests_ProblemDescryptions" FromRole="ProblemDescryptions" ToRole="DataRequests" />
+  </EntityType>
+  <EntityType Name="RequestStatus">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DataRequests" Relationship="Self.FK_DataRequests_RequestStatuses" FromRole="RequestStatuses" ToRole="DataRequests" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DataUsers" Relationship="Self.FK_DataUsers_Types" FromRole="Types" ToRole="DataUsers" />
+  </EntityType>
+  <Association Name="FK_DataComments_DataRequests">
+    <End Role="DataRequests" Type="Self.DataRequest" Multiplicity="1" />
+    <End Role="DataComments" Type="Self.DataComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DataRequests">
+        <PropertyRef Name="requestID" />
+      </Principal>
+      <Dependent Role="DataComments">
+        <PropertyRef Name="requestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataComments_DataUsers">
+    <End Role="DataUsers" Type="Self.DataUser" Multiplicity="1" />
+    <End Role="DataComments" Type="Self.DataComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DataUsers">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="DataComments">
+        <PropertyRef Name="masterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_DataUsers">
+    <End Role="DataUsers" Type="Self.DataUser" Multiplicity="1" />
+    <End Role="DataRequests" Type="Self.DataRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DataUsers">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="clientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_DataUsers1">
+    <End Role="DataUsers" Type="Self.DataUser" Multiplicity="0..1" />
+    <End Role="DataRequests" Type="Self.DataRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DataUsers">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="masterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_OrgTechTypes">
+    <End Role="OrgTechTypes" Type="Self.OrgTechType" Multiplicity="1" />
+    <End Role="DataRequests" Type="Self.DataRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrgTechTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="id_orgTechType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_ProblemDescryptions">
+    <End Role="ProblemDescryptions" Type="Self.ProblemDescryption" Multiplicity="1" />
+    <End Role="DataRequests" Type="Self.DataRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProblemDescryptions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="id_problemDescryption" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataRequests_RequestStatuses">
+    <End Role="RequestStatuses" Type="Self.RequestStatus" Multiplicity="1" />
+    <End Role="DataRequests" Type="Self.DataRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RequestStatuses">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DataRequests">
+        <PropertyRef Name="id_requestStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataUsers_Types">
+    <End Role="Types" Type="Self.Type" Multiplicity="1" />
+    <End Role="DataUsers" Type="Self.DataUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Types">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DataUsers">
+        <PropertyRef Name="id_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DEMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DataComments" EntityType="Self.DataComment" />
+    <EntitySet Name="DataRequests" EntityType="Self.DataRequest" />
+    <EntitySet Name="DataUsers" EntityType="Self.DataUser" />
+    <EntitySet Name="OrgTechTypes" EntityType="Self.OrgTechType" />
+    <EntitySet Name="ProblemDescryptions" EntityType="Self.ProblemDescryption" />
+    <EntitySet Name="RequestStatuses" EntityType="Self.RequestStatus" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Types" EntityType="Self.Type" />
+    <AssociationSet Name="FK_DataComments_DataRequests" Association="Self.FK_DataComments_DataRequests">
+      <End Role="DataRequests" EntitySet="DataRequests" />
+      <End Role="DataComments" EntitySet="DataComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataComments_DataUsers" Association="Self.FK_DataComments_DataUsers">
+      <End Role="DataUsers" EntitySet="DataUsers" />
+      <End Role="DataComments" EntitySet="DataComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_DataUsers" Association="Self.FK_DataRequests_DataUsers">
+      <End Role="DataUsers" EntitySet="DataUsers" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_DataUsers1" Association="Self.FK_DataRequests_DataUsers1">
+      <End Role="DataUsers" EntitySet="DataUsers" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_OrgTechTypes" Association="Self.FK_DataRequests_OrgTechTypes">
+      <End Role="OrgTechTypes" EntitySet="OrgTechTypes" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_ProblemDescryptions" Association="Self.FK_DataRequests_ProblemDescryptions">
+      <End Role="ProblemDescryptions" EntitySet="ProblemDescryptions" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataRequests_RequestStatuses" Association="Self.FK_DataRequests_RequestStatuses">
+      <End Role="RequestStatuses" EntitySet="RequestStatuses" />
+      <End Role="DataRequests" EntitySet="DataRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataUsers_Types" Association="Self.FK_DataUsers_Types">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="DataUsers" EntitySet="DataUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
